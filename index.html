@@ -26,17 +26,26 @@
 }
 
 body{
-    background:var(--bg);
+    background:radial-gradient(circle at top,#090612,#030305 60%);
     color:var(--text-primary);
     font-family:'Inter',sans-serif;
     overflow-x:hidden;
 }
 
-.noise{
+/* fundo brilhante */
+body::before{
+    content:"";
     position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:1;
+    width:500px;
+    height:500px;
+    background:radial-gradient(
+        rgba(139,92,246,.15),
+        transparent 70%
+    );
+    top:-150px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:-1;
 }
 
 nav{
@@ -45,11 +54,13 @@ nav{
     width:100%;
     z-index:100;
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    padding:.8rem 8%;
-    background:var(--glass);
+    align-items:center;
+    padding:1rem 8%;
+
+    background:rgba(0,0,0,.35);
     backdrop-filter:blur(12px);
+
     border-bottom:1px solid var(--border);
 }
 
@@ -57,21 +68,19 @@ nav{
     display:flex;
     align-items:center;
     gap:10px;
+
     text-decoration:none;
-    color:#fff;
+    color:white;
+
     font-family:'Syne';
     font-weight:800;
 }
 
 .img-logo-nav{
-    width:32px;
-    height:32px;
-    border-radius:6px;
-    border:1px solid var(--purple-main);
-
-    /* CORRIGIDO */
+    width:35px;
+    height:35px;
     object-fit:cover;
-    display:block;
+    border-radius:8px;
 }
 
 .nav-links{
@@ -81,110 +90,293 @@ nav{
 }
 
 .nav-links a{
-    text-decoration:none;
     color:var(--text-secondary);
+    text-decoration:none;
 }
 
 .btn-cta-nav{
-    background:#fff;
-    color:#000;
-    padding:.5rem 1rem;
-    border-radius:8px;
+    background:white;
+    color:black;
+
     text-decoration:none;
+
+    padding:.7rem 1rem;
+    border-radius:10px;
 }
 
 .hero{
     min-height:100vh;
+
     display:flex;
     flex-direction:column;
+
     align-items:center;
     justify-content:center;
+
     text-align:center;
-    position:relative;
-    z-index:2;
+
     padding:120px 5%;
 }
 
 .top-title{
     color:var(--purple-main);
-    margin-bottom:2rem;
-    letter-spacing:3px;
+
     text-transform:uppercase;
+    letter-spacing:3px;
+
+    margin-bottom:2rem;
+
+    animation:fadeUp 1s ease;
 }
 
+/* MASCOTE */
+.owl-container{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+/* IMAGEM ANIMADA */
 .hero-main-img{
-    width:180px;
-    height:180px;
+    width:220px;
+    height:220px;
 
-    /* CORRIGIDO */
     object-fit:cover;
-    display:block;
 
-    background:#000;
-    border-radius:30px;
+    border-radius:35px;
+
+    background:black;
     padding:10px;
-    border:1px solid rgba(139,92,246,.5);
-    margin-bottom:2rem;
+
+    border:1px solid rgba(139,92,246,.4);
 
     box-shadow:
-    0 0 20px rgba(139,92,246,.4),
-    0 0 50px rgba(139,92,246,.2);
+    0 0 30px rgba(139,92,246,.5),
+    0 0 100px rgba(139,92,246,.15);
 
-    animation:pulse 4s infinite alternate;
+    animation:
+    float 4s ease-in-out infinite,
+    glow 3s ease-in-out infinite alternate;
+
+    transition:.6s;
 }
 
-@keyframes pulse{
-    from{
-        transform:translateY(0);
-    }
-    to{
-        transform:translateY(-8px);
-    }
+.hero-main-img:hover{
+
+    transform:
+    scale(1.08)
+    rotate(6deg);
+
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-18px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+
+@keyframes glow{
+
+from{
+box-shadow:
+0 0 20px rgba(139,92,246,.3),
+0 0 60px rgba(139,92,246,.15);
+}
+
+to{
+box-shadow:
+0 0 50px rgba(139,92,246,.7),
+0 0 130px rgba(139,92,246,.3);
+}
+
+}
+
+.owl-text-box{
+
+margin-top:2rem;
+
+max-width:700px;
+
+padding:1.4rem;
+
+background:rgba(255,255,255,.03);
+
+border:1px solid rgba(255,255,255,.05);
+
+border-radius:20px;
+
+backdrop-filter:blur(12px);
+
+animation:fadeUp 1.3s ease;
+}
+
+.owl-title{
+
+font-family:'Syne';
+font-size:1.4rem;
+
+margin-bottom:.8rem;
+}
+
+.owl-title span{
+color:var(--purple-main);
+}
+
+.owl-description{
+
+line-height:1.8;
+
+color:var(--text-secondary);
+
+font-size:1rem;
 }
 
 h1{
-    font-family:'Syne';
-    font-size:clamp(2rem,5vw,4rem);
-    margin-bottom:1rem;
+
+margin-top:2rem;
+
+font-family:'Syne';
+
+font-size:clamp(2rem,5vw,4.5rem);
+
+max-width:900px;
+
+line-height:1.1;
 }
 
 h1 span{
-    background:linear-gradient(to right,#fff,var(--purple-main));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+
+background:
+linear-gradient(
+to right,
+white,
+var(--purple-main)
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
 }
 
 .hero-desc{
-    max-width:600px;
-    color:var(--text-secondary);
-    margin-bottom:2rem;
+
+margin-top:1rem;
+
+max-width:650px;
+
+color:var(--text-secondary);
+
+line-height:1.8;
 }
 
 .btn-main{
-    background:var(--purple-main);
-    color:white;
-    padding:1rem 2rem;
-    text-decoration:none;
-    border-radius:10px;
+
+margin-top:2rem;
+
+display:inline-block;
+
+padding:1rem 2rem;
+
+background:var(--purple-main);
+
+border-radius:12px;
+
+text-decoration:none;
+
+color:white;
+
+font-weight:600;
+
+transition:.5s;
+}
+
+.btn-main:hover{
+
+transform:translateY(-5px);
+
+box-shadow:
+0 20px 40px rgba(139,92,246,.3);
+
+}
+
+@keyframes fadeUp{
+
+from{
+opacity:0;
+transform:translateY(50px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
 }
 
 .features{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:20px;
-    padding:4rem 8%;
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(280px,1fr));
+
+gap:20px;
+
+padding:4rem 8%;
 }
 
 .feature-card{
-    border:1px solid var(--border);
-    padding:2rem;
-    border-radius:16px;
+
+background:rgba(255,255,255,.02);
+
+border:1px solid var(--border);
+
+padding:2rem;
+
+border-radius:20px;
+
+transition:.5s;
+}
+
+.feature-card:hover{
+
+transform:translateY(-8px);
+
+border-color:rgba(139,92,246,.5);
+
+}
+
+.feature-card h3{
+margin-bottom:1rem;
+font-family:'Syne';
+}
+
+.feature-card p{
+color:var(--text-secondary);
+line-height:1.7;
 }
 
 @media(max-width:768px){
-    .nav-links{
-        display:none;
-    }
+
+.nav-links{
+display:none;
+}
+
+.hero-main-img{
+width:180px;
+height:180px;
+}
+
 }
 </style>
 </head>
@@ -192,21 +384,28 @@ h1 span{
 <body>
 
 <nav>
-    <a href="#" class="logo-container">
 
-        <!-- USE O MESMO ARQUIVO -->
-        <img src="./coruja.png" alt="Logo Coruja" class="img-logo-nav">
+<a href="#" class="logo-container">
 
-        CORUJA CODE
-    </a>
+<img src="./coruja.png"
+class="img-logo-nav">
 
-    <ul class="nav-links">
-        <li><a href="#">Trilhas</a></li>
-        <li><a href="#">Desafios</a></li>
-        <li><a href="#">Comunidade</a></li>
-    </ul>
+CORUJA CODE
 
-    <a href="#" class="btn-cta-nav">Login</a>
+</a>
+
+<ul class="nav-links">
+
+<li><a href="#">Trilhas</a></li>
+<li><a href="#">Desafios</a></li>
+<li><a href="#">Comunidade</a></li>
+
+</ul>
+
+<a href="#" class="btn-cta-nav">
+Login
+</a>
+
 </nav>
 
 <main class="hero">
@@ -215,24 +414,64 @@ h1 span{
 Resolução de Problemas Estruturados em Computação
 </div>
 
-<!-- USE O MESMO ARQUIVO -->
-<img src="./coruja.png"
-alt="Coruja Code"
-class="hero-main-img"
+<div class="owl-container">
 
-onerror="this.src='https://placehold.co/180x180/000000/ffffff?text=CORUJA';">
+<img
+src="./coruja.png"
+alt="Coruja"
+class="hero-main-img"
+onerror="this.src='https://placehold.co/220x220/000000/ffffff?text=CORUJA';">
+
+<div class="owl-text-box">
+
+<div class="owl-title">
+Conheça a <span>Coruja Code</span> 🦉
+</div>
+
+<p class="owl-description">
+
+A coruja representa muito mais que um mascote.
+Ela simboliza visão estratégica, inteligência e
+a habilidade de enxergar padrões onde outros veem
+caos. Assim como uma coruja observa o ambiente em
+silêncio antes de agir, um grande programador
+analisa problemas profundamente antes de escrever
+a primeira linha de código.
+
+Na Coruja Code, ela guia sua jornada através da
+lógica, algoritmos e desafios computacionais,
+transformando aprendizado em evolução contínua.
+
+</p>
+
+</div>
+
+</div>
 
 <h1>
-Sabedoria em cada <span>bit.</span><br>
-Excelência em cada <span>solução.</span>
+
+Sabedoria em cada
+<span>bit.</span>
+
+<br>
+
+Excelência em cada
+<span>solução.</span>
+
 </h1>
 
 <p class="hero-desc">
-Domine a engenharia de software com foco em algoritmos de alta performance e pensamento lógico avançado.
+
+Domine algoritmos, fortaleça sua lógica e evolua
+sua capacidade de resolver problemas reais com
+pensamento computacional.
+
 </p>
 
 <a href="#" class="btn-main">
+
 Começar Jornada
+
 </a>
 
 </main>
@@ -240,24 +479,36 @@ Começar Jornada
 <section class="features">
 
 <div class="feature-card">
+
 <h3>Visão Computacional</h3>
+
 <p>
-Análise de complexidade e otimização de recursos.
+Aprenda a identificar padrões e criar soluções
+escaláveis.
 </p>
+
 </div>
 
 <div class="feature-card">
+
 <h3>Arquitetura Lógica</h3>
+
 <p>
-Trilhas adaptativas que moldam seu raciocínio.
+Estruture pensamentos e resolva desafios
+de forma inteligente.
 </p>
+
 </div>
 
 <div class="feature-card">
+
 <h3>Debug Avançado</h3>
+
 <p>
-Identificação proativa de gargalos.
+Encontre gargalos antes que eles se tornem
+problemas reais.
 </p>
+
 </div>
 
 </section>
